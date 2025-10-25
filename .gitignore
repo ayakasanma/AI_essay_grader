@@ -32,5 +32,8 @@ pnpm-debug.log*
 *.swo
 *~
 
+# Claude Code
+.claude/settings.local.json
+
 # Vercel
 .vercel
