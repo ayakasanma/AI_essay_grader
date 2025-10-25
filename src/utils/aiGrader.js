@@ -59,6 +59,10 @@ export const gradeEssay = async (essayText) => {
     // Fallback to mock data if API fails
     if (error.response?.status === 401) {
       throw new Error('API 金鑰無效，請檢查設定')
+    } else if (error.response?.status === 402) {
+      console.warn('⚠️ API 帳戶餘額不足，使用模擬數據')
+      alert('DeepSeek API 帳戶餘額不足，目前使用模擬批改數據。請前往 platform.deepseek.com 充值。')
+      return getMockGradingResult(essayText)
     } else if (error.response?.status === 429) {
       throw new Error('API 請求過於頻繁，請稍後再試')
     } else {
