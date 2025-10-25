@@ -1,0 +1,57 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* iOS-style scrollbar */
+::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+}
+
+/* Disable text selection for better native feel */
+.no-select {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* iOS-style haptic feedback animation */
+@keyframes tap-feedback {
+  0% { transform: scale(1); }
+  50% { transform: scale(0.95); }
+  100% { transform: scale(1); }
+}
+
+.tap-feedback:active {
+  animation: tap-feedback 0.1s ease;
+}
+
+/* Custom iOS-style button */
+.ios-button {
+  @apply bg-ios-blue text-white font-semibold py-3 px-6 rounded-ios shadow-ios;
+  @apply active:opacity-80 transition-opacity duration-150;
+}
+
+/* Custom iOS-style card */
+.ios-card {
+  @apply bg-white rounded-ios-card shadow-ios p-4;
+}
+
+/* Status bar safe area */
+.safe-area-top {
+  padding-top: env(safe-area-inset-top);
+}
+
+.safe-area-bottom {
+  padding-bottom: env(safe-area-inset-bottom);
+}

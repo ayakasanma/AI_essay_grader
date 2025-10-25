@@ -1,0 +1,15 @@
+{
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ],
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "framework": "vite",
+  "env": {
+    "VITE_DEEPSEEK_API_KEY": "@deepseek_api_key",
+    "VITE_DEEPSEEK_API_URL": "https://api.deepseek.com/v1/chat/completions"
+  }
+}
