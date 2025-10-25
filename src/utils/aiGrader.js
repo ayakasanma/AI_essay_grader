@@ -8,14 +8,21 @@ const DEEPSEEK_API_KEY = import.meta.env.VITE_DEEPSEEK_API_KEY
  * Returns structured grading results
  */
 export const gradeEssay = async (essayText) => {
+  console.log('🔍 Grading essay...')
+  console.log('API Key exists:', !!DEEPSEEK_API_KEY)
+  console.log('API URL:', DEEPSEEK_API_URL)
+
   if (!DEEPSEEK_API_KEY) {
-    console.warn('DeepSeek API key not found, using mock data')
+    console.warn('⚠️ DeepSeek API key not found, using mock data')
     return getMockGradingResult(essayText)
   }
+
+  console.log('✅ API Key found, calling DeepSeek API...')
 
   try {
     const prompt = buildGradingPrompt(essayText)
 
+    console.log('📡 Sending request to DeepSeek API...')
     const response = await axios.post(
       DEEPSEEK_API_URL,
       {
@@ -41,10 +48,13 @@ export const gradeEssay = async (essayText) => {
       }
     )
 
+    console.log('✅ API response received successfully!')
     const aiResponse = response.data.choices[0].message.content
+    console.log('📝 AI Response preview:', aiResponse.substring(0, 200))
     return parseGradingResponse(aiResponse, essayText)
   } catch (error) {
-    console.error('AI grading error:', error)
+    console.error('❌ AI grading error:', error)
+    console.error('Error details:', error.response?.data || error.message)
 
     // Fallback to mock data if API fails
     if (error.response?.status === 401) {
